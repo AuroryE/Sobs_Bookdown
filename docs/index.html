@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Data Management for 2022 Box Elder County and Cassia County Sagebrush-Obligate Songbird Surveys</title>
-  <meta name="description" content="This book documents the process for creating a database from the sagebrush-obligate songbird (SOBS) data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures and analyses." />
+  <meta name="description" content="This book documents the process for creating a database from the sagebrush-obligate songbird data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures and analyses." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Data Management for 2022 Box Elder County and Cassia County Sagebrush-Obligate Songbird Surveys" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This book documents the process for creating a database from the sagebrush-obligate songbird (SOBS) data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures and analyses." />
+  <meta property="og:description" content="This book documents the process for creating a database from the sagebrush-obligate songbird data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures and analyses." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Data Management for 2022 Box Elder County and Cassia County Sagebrush-Obligate Songbird Surveys" />
   
-  <meta name="twitter:description" content="This book documents the process for creating a database from the sagebrush-obligate songbird (SOBS) data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures and analyses." />
+  <meta name="twitter:description" content="This book documents the process for creating a database from the sagebrush-obligate songbird data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures and analyses." />
   
 
 <meta name="author" content="Rory Eggleston" />
@@ -158,11 +158,10 @@ div.csl-indent {
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#building-the-database"><i class="fa fa-check"></i><b>1.1</b> Building the Database</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#visualizing-database-structure"><i class="fa fa-check"></i><b>1.2</b> Visualizing Database Structure</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown</a>
 <ul>
@@ -220,30 +219,124 @@ div.csl-indent {
 <p class="author"><em>Rory Eggleston</em></p>
 <p class="date"><em>2023-03-20</em></p>
 </div>
-<div id="about" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports; for example, a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<div id="usage" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Usage<a href="index.html#usage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Each <strong>bookdown</strong> chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter <em>must</em> start with a first-level heading: <code># A good chapter</code>, and can contain one (and only one) first-level heading.</p>
-<p>Use second-level and higher headings within chapters like: <code>## A short section</code> or <code>### An even shorter section</code>.</p>
-<p>The <code>index.Rmd</code> file is required, and is also your first book chapter. It will be the homepage when you render the book.</p>
+<div id="introduction" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>To examine how sagebrush-obligate songbirds (SOBS) respond to habitat changes and recovery associated with wildfires, we collected point count data on SOBS in northwest Utah and south-central Idaho across 30 pairs of burned and control plots. Data was collected in a single data collection form using Survey123. Each plot was 1km x 1km and contained a minimum of 10 equally-spaced points that were 125m from the plot border and 250m from each other point. The data collection form was structured such that every new form constituted a new visit to a specific 1km plot. Within that form, observers added a nested point form for each point surveyed. Within each point, each observation of individual or large groups of birds was added. As such, there were three levels of data collected: each visit to each site, the points within each of those visits, and the observations at each of those points. Survey123 generated a unique global ID field for each row in each of these levels, and these global IDs are used to link points to each visit and observations to each point and each visit.</p>
+<div id="building-the-database" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Building the Database<a href="index.html#building-the-database" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To begin, I first created a database file using RSQLite:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>sobs_db <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), </span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;/Users/roryeggleston/Documents/WILD6900_DataScience/Sobs_DataManagement/code/sobs.db&quot;</span>)</span></code></pre></div>
+<p>I started building the database by creating a table for the visit-level data using the following code:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbExecute</span>(sobs_db, <span class="st">&quot;CREATE TABLE sobs_survey (</span></span>
+<span id="cb2-2"><a href="index.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">  global_id_plot text NOT NULL,</span></span>
+<span id="cb2-3"><a href="index.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">  date_and_start_time_plot text,</span></span>
+<span id="cb2-4"><a href="index.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">  observer_plot text,</span></span>
+<span id="cb2-5"><a href="index.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">  transect_id text,</span></span>
+<span id="cb2-6"><a href="index.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">  visit char(2),</span></span>
+<span id="cb2-7"><a href="index.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">  plot_type varchar(20),</span></span>
+<span id="cb2-8"><a href="index.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">  burn_category text,</span></span>
+<span id="cb2-9"><a href="index.html#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">  sky_start char(1),</span></span>
+<span id="cb2-10"><a href="index.html#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">  sky_end char(1),</span></span>
+<span id="cb2-11"><a href="index.html#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">  wind_start char(1),</span></span>
+<span id="cb2-12"><a href="index.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">  wind_end char(1),</span></span>
+<span id="cb2-13"><a href="index.html#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">  start_temp varchar(3),</span></span>
+<span id="cb2-14"><a href="index.html#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">  end_temp varchar(3),</span></span>
+<span id="cb2-15"><a href="index.html#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">  creation_date_plot text,</span></span>
+<span id="cb2-16"><a href="index.html#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">  creator_plot text,</span></span>
+<span id="cb2-17"><a href="index.html#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">  edit_date_plot text,</span></span>
+<span id="cb2-18"><a href="index.html#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">  editor_plot text,</span></span>
+<span id="cb2-19"><a href="index.html#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="st">  lat_plot double,</span></span>
+<span id="cb2-20"><a href="index.html#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">  long_plot double,</span></span>
+<span id="cb2-21"><a href="index.html#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="st">  utm_easting_plot double,</span></span>
+<span id="cb2-22"><a href="index.html#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">  utm_northing_plot double,</span></span>
+<span id="cb2-23"><a href="index.html#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="st">  utm_zone_plot char(2),</span></span>
+<span id="cb2-24"><a href="index.html#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="st">  PRIMARY KEY (global_id_plot)</span></span>
+<span id="cb2-25"><a href="index.html#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="st">);&quot;</span>)</span></code></pre></div>
+<p>Very little of the visit-level data is numeric, so I opted to store most fields as text or characters, with the exception of coordinates. The global ID of the plot visit is the primary key for this table.</p>
+<p>I populated the table as follows, first reading in the CSV document, checking the column names, and then writing the data into the newly-created table:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a>sobs_survey <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/Users/roryeggleston/Documents/WILD6900_DataScience/Sobs_DataManagement/data/Sobs_Survey_2022_Editable.csv&quot;</span>,</span>
+<span id="cb3-2"><a href="index.html#cb3-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-3"><a href="index.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sobs_survey)</span>
+<span id="cb3-4"><a href="index.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="index.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(sobs_db, <span class="st">&quot;sobs_survey&quot;</span>, sobs_survey, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>I then made sure that all of this had run correctly:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(sobs_db, <span class="st">&quot;SELECT * FROM sobs_survey LIMIT 10;&quot;</span>)</span></code></pre></div>
+<p>It did, so I proceeded to created a table for the point-level data, read in the associated CSV, write it to the new table, and check that it had worked:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="index.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbExecute</span>(sobs_db, <span class="st">&quot;CREATE TABLE sobs_point (</span></span>
+<span id="cb5-2"><a href="index.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">          global_id_point text NOT NULL,</span></span>
+<span id="cb5-3"><a href="index.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">          point text,</span></span>
+<span id="cb5-4"><a href="index.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">          start_time_at_point text,</span></span>
+<span id="cb5-5"><a href="index.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">          private_property varchar(3),</span></span>
+<span id="cb5-6"><a href="index.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">          cliff_rock varchar(3),</span></span>
+<span id="cb5-7"><a href="index.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">          cheatgrass_present varchar(3),</span></span>
+<span id="cb5-8"><a href="index.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">          why_no_survey text,</span></span>
+<span id="cb5-9"><a href="index.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">          global_id_plot text NOT NULL,</span></span>
+<span id="cb5-10"><a href="index.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">          creation_date_point text,</span></span>
+<span id="cb5-11"><a href="index.html#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="st">          creator_point text,</span></span>
+<span id="cb5-12"><a href="index.html#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="st">          edit_date_point text,</span></span>
+<span id="cb5-13"><a href="index.html#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="st">          editor_point text,</span></span>
+<span id="cb5-14"><a href="index.html#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="st">          area_burned varchar(3),</span></span>
+<span id="cb5-15"><a href="index.html#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="st">          percent_burned integer,</span></span>
+<span id="cb5-16"><a href="index.html#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="st">          point_notes_pt text,</span></span>
+<span id="cb5-17"><a href="index.html#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="st">          lat_point double,</span></span>
+<span id="cb5-18"><a href="index.html#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="st">          long_point double,</span></span>
+<span id="cb5-19"><a href="index.html#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="st">          utm_easting_point double,</span></span>
+<span id="cb5-20"><a href="index.html#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="st">          utm_northing_point double,</span></span>
+<span id="cb5-21"><a href="index.html#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="st">          utm_zone_point char(2),</span></span>
+<span id="cb5-22"><a href="index.html#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="st">          PRIMARY KEY (global_id_point),</span></span>
+<span id="cb5-23"><a href="index.html#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="st">          FOREIGN KEY (global_id_plot) REFERENCES sobs_survey(global_id_plot)</span></span>
+<span id="cb5-24"><a href="index.html#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="st">          );&quot;</span>)</span>
+<span id="cb5-25"><a href="index.html#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="index.html#cb5-26" aria-hidden="true" tabindex="-1"></a>sobs_point <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/Users/roryeggleston/Documents/WILD6900_DataScience/Sobs_DataManagement/data/Sobs_Point_2022_Editable.csv&quot;</span>,</span>
+<span id="cb5-27"><a href="index.html#cb5-27" aria-hidden="true" tabindex="-1"></a>                       <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-28"><a href="index.html#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sobs_point)</span>
+<span id="cb5-29"><a href="index.html#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="index.html#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(sobs_db, <span class="st">&quot;sobs_point&quot;</span>, sobs_point, <span class="at">append =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-31"><a href="index.html#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="index.html#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(sobs_db, <span class="st">&quot;SELECT * FROM sobs_point LIMIT 10;&quot;</span>)</span></code></pre></div>
+<p>For the point-level data, the primary key is the global id for the point data, and the foreign key linking each visit to its associated points is the global ID for the visit-level data. Apart from percentages and coordinates, most of this data is categorical, and so it stored as text or characters.</p>
+<p>The point-level data table worked, so I ran through the same procedures for the observation-level data:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="index.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbExecute</span>(sobs_db, <span class="st">&quot;CREATE TABLE sobs_obs (</span></span>
+<span id="cb6-2"><a href="index.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">          global_id_obs text,</span></span>
+<span id="cb6-3"><a href="index.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">          minute integer,</span></span>
+<span id="cb6-4"><a href="index.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">          species_code varchar(5),</span></span>
+<span id="cb6-5"><a href="index.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">          radial_distance integer,</span></span>
+<span id="cb6-6"><a href="index.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">          how_detected char(1),</span></span>
+<span id="cb6-7"><a href="index.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">          song_also varchar(3),</span></span>
+<span id="cb6-8"><a href="index.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">          sex char(1),</span></span>
+<span id="cb6-9"><a href="index.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">          visual_detection varchar(3),</span></span>
+<span id="cb6-10"><a href="index.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">          migrating varchar(3),</span></span>
+<span id="cb6-11"><a href="index.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">          point_notes_obs text,</span></span>
+<span id="cb6-12"><a href="index.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="st">          global_id_point text,</span></span>
+<span id="cb6-13"><a href="index.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="st">          creation_date_obs text,</span></span>
+<span id="cb6-14"><a href="index.html#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st">          creator_obs text,</span></span>
+<span id="cb6-15"><a href="index.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">          edit_date_obs text,</span></span>
+<span id="cb6-16"><a href="index.html#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="st">          editor_obs text,</span></span>
+<span id="cb6-17"><a href="index.html#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="st">          bird_within_burn varchar(3),</span></span>
+<span id="cb6-18"><a href="index.html#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="st">          direction varchar(20),</span></span>
+<span id="cb6-19"><a href="index.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="st">          PRIMARY KEY (global_id_obs),</span></span>
+<span id="cb6-20"><a href="index.html#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="st">          FOREIGN KEY (global_id_point) REFERENCES sobs_point(global_id_point)</span></span>
+<span id="cb6-21"><a href="index.html#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="st">);&quot;</span>)</span>
+<span id="cb6-22"><a href="index.html#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="index.html#cb6-23" aria-hidden="true" tabindex="-1"></a>sobs_obs <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/Users/roryeggleston/Documents/WILD6900_DataScience/Sobs_DataManagement/data/Sobs_Observations_2022_Editable.csv&quot;</span>,</span>
+<span id="cb6-24"><a href="index.html#cb6-24" aria-hidden="true" tabindex="-1"></a>                       <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-25"><a href="index.html#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sobs_obs)</span>
+<span id="cb6-26"><a href="index.html#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="index.html#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(sobs_db, <span class="st">&quot;sobs_obs&quot;</span>, sobs_obs, <span class="at">append =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-28"><a href="index.html#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="index.html#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(sobs_db, <span class="st">&quot;SELECT * FROM sobs_obs LIMIT 10;&quot;</span>)</span></code></pre></div>
+<p>For the observation-level data, the observation global ID is the primary key, and the foreign key is the global ID for the point-level data. As bird species are initially collected as character data, most of the data in this table is again stored as text or characters. This table will need to be converted into a frequency table, but for now, this set-up will work.</p>
 </div>
-<div id="render-book" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Render book<a href="index.html#render-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You can render the HTML version of this example book without changing anything:</p>
-<ol style="list-style-type: decimal">
-<li><p>Find the <strong>Build</strong> pane in the RStudio IDE, and</p></li>
-<li><p>Click on <strong>Build Book</strong>, then select your output format, or select “All formats” if you’d like to use multiple formats from the same book source files.</p></li>
-</ol>
-<p>Or build the book from the R console:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
-<p>To render this example to PDF as a <code>bookdown::pdf_book</code>, you’ll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
+<div id="visualizing-database-structure" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Visualizing Database Structure<a href="index.html#visualizing-database-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Based on the code above, the database should be structured like this:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:image"></span>
+<img src="WILD6900_Data-Science_Assignment-3_Database-Design_RE_20230219.png" alt="2022 SOBS Data Database Structure" width="100%" />
+<p class="caption">
+Figure 1.1: 2022 SOBS Data Database Structure
+</p>
 </div>
-<div id="preview-book" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Preview book<a href="index.html#preview-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in “Preview book”, or from the R console:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
 
 </div>
 </div>

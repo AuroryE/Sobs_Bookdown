@@ -1,5 +1,4 @@
-h1:summary Summary
-h2:usage Usage
-h2:render-book Render book
-h2:preview-book Preview book
+h1:introduction Introduction
+h2:building-the-database Building the Database
+h2:visualizing-database-structure Visualizing Database Structure
 

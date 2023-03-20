@@ -1,11 +1,11 @@
+fig:image
 fig:nice-fig
 tab:nice-tab
 eq:binom
 thm:tri
-about
-usage
-render-book
-preview-book
+introduction
+building-the-database
+visualizing-database-structure
 hello-bookdown
 a-section
 cross
