@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "Data Management for 2022 Box Elder County and Cassia County Sagebrush-Obligate Songbird Surveys"
+author: "Rory Eggleston"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -8,16 +8,16 @@ bibliography: [book.bib, packages.bib]
 # url: your book url like https://bookdown.org/yihui/bookdown
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
+  This book documents the process for creating a database from the sagebrush-obligate songbird data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures and analyses.
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# About
+# Summary 
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+To examine how sagebrush-obligate songbirds (SOBS) respond to habitat changes and recovery associated with wildfires, we collected point count data on SOBS in northwest Utah and south-central Idaho across 30 pairs of burned and control plots. Data was collected in a single data collection form using Survey123. Each plot was 1km x 1km and contained a minimum of 10 equally-spaced points that were 125m from the plot border and 250m from each other point. The data collection form was structured such that every new form constituted a new visit to a specific 1km plot. Within that form, observers added a nested point form for each point surveyed. Within each point, each observation of individual or large groups of birds was added. As such, there were three levels of data collected: each visit to each site, the points within each of those visits, and the observations at each of those points. 
+
+
 
 ## Usage 
 
