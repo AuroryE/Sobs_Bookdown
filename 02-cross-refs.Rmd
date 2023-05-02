@@ -1,34 +1,25 @@
-# Cross-references {#cross}
+# Plotting counts of focal species
 
-Cross-references make it easier for your readers to find and link to elements in your book.
+Now, let's do some basic visualization of the counts of focal sagebrush-obligate and near-obligate songbirds from the 2022 surveys. We'll do just a season-wide count bar plot and a season-wide bar plot broken down by plot type (burned and control).
 
-## Chapters and sub-chapters
+## Plotting counts of focal species
 
-There are two steps to cross-reference any heading:
+Our focal species are Brewer's Sparrows (BRSP), Sage Thrashers (SATH), Sagebrush Sparrows (SABS), Green-tailed Towhees (GTTO), and Vesper Sparrows (VESP). First we'll plot the season-wide counts:
 
-1. Label the heading: `# Hello world {#nice-label}`. 
-    - Leave the label off if you like the automated heading generated based on your heading title: for example, `# Hello world` = `# Hello world {#hello-world}`.
-    - To label an un-numbered heading, use: `# Hello world {-#nice-label}` or `{# Hello world .unnumbered}`.
 
-1. Next, reference the labeled heading anywhere in the text using `\@ref(nice-label)`; for example, please see Chapter \@ref(cross). 
-    - If you prefer text as the link instead of a numbered reference use: [any text you want can go here](#cross).
-
-## Captioned figures and tables
-
-Figures and tables *with captions* can also be cross-referenced from elsewhere in your book using `\@ref(fig:chunk-label)` and `\@ref(tab:chunk-label)`, respectively.
-
-See Figure \@ref(fig:nice-fig).
-
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases.'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
+```{r echo=FALSE, fig.cap="Counts of five focal species in 2022", fig.align='center', out.width='100%'}
+knitr::include_graphics("focal_sp_counts.png")
 ```
 
-Don't miss Table \@ref(tab:nice-tab).
+Brewer's Sparrows and Vesper Sparrows are most common, with tracks with anectodal observations.
 
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(pressure, 10), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
+## Plotting counts of focal species by plot type
+
+Next let's look at how counts differ by plot type:
+
+```{r echo=FALSE, fig.cap="Counts of five focal species in 2022 by plot type", fig.align='center', out.width='100%'}
+knitr::include_graphics("focal_sp_counts_plot-type.png")
 ```
+
+
+Given that Vesper Sparrows prefer open ground, it makes sense that they dominate burned plots, while Brewer's Sparrows, which prefer sage cover, dominate control plots.

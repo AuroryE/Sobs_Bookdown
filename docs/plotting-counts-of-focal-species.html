@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Footnotes and citations | Data Management for 2022 Box Elder County and Cassia County Sagebrush-Obligate Songbird Surveys</title>
+  <title>Chapter 3 Plotting counts of focal species | Data Management for 2022 Box Elder County and Cassia County Sagebrush-Obligate Songbird Surveys</title>
   <meta name="description" content="This book documents the process for creating a database from the sagebrush-obligate songbird data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures of focal species counts and counts by plot type." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Footnotes and citations | Data Management for 2022 Box Elder County and Cassia County Sagebrush-Obligate Songbird Surveys" />
+  <meta property="og:title" content="Chapter 3 Plotting counts of focal species | Data Management for 2022 Box Elder County and Cassia County Sagebrush-Obligate Songbird Surveys" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This book documents the process for creating a database from the sagebrush-obligate songbird data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures of focal species counts and counts by plot type." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Footnotes and citations | Data Management for 2022 Box Elder County and Cassia County Sagebrush-Obligate Songbird Surveys" />
+  <meta name="twitter:title" content="Chapter 3 Plotting counts of focal species | Data Management for 2022 Box Elder County and Cassia County Sagebrush-Obligate Songbird Surveys" />
   
   <meta name="twitter:description" content="This book documents the process for creating a database from the sagebrush-obligate songbird data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures of focal species counts and counts by plot type." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="parts.html"/>
-<link rel="next" href="blocks.html"/>
+<link rel="prev" href="cleaning-the-data.html"/>
+<link rel="next" href="parts.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -212,43 +212,40 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="footnotes-and-citations" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Footnotes and citations<a href="footnotes-and-citations.html#footnotes-and-citations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="footnotes" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Footnotes<a href="footnotes-and-citations.html#footnotes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Footnotes are put inside the square brackets after a caret <code>^[]</code>. Like this one <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<div id="plotting-counts-of-focal-species" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Plotting counts of focal species<a href="plotting-counts-of-focal-species.html#plotting-counts-of-focal-species" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Now, let’s do some basic visualization of the counts of focal sagebrush-obligate and near-obligate songbirds from the 2022 surveys. We’ll do just a season-wide count bar plot and a season-wide bar plot broken down by plot type (burned and control).</p>
+<div id="plotting-counts-of-focal-species-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Plotting counts of focal species<a href="plotting-counts-of-focal-species.html#plotting-counts-of-focal-species-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Our focal species are Brewer’s Sparrows (BRSP), Sage Thrashers (SATH), Sagebrush Sparrows (SABS), Green-tailed Towhees (GTTO), and Vesper Sparrows (VESP). First we’ll plot the season-wide counts:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="focal_sp_counts.png" alt="Counts of five focal species in 2022" width="100%" />
+<p class="caption">
+Figure 3.1: Counts of five focal species in 2022
+</p>
 </div>
-<div id="citations" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Citations<a href="footnotes-and-citations.html#citations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Reference items in your bibliography file(s) using <code>@key</code>.</p>
-<p>For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="#ref-R-bookdown" role="doc-biblioref">Xie 2023</a>)</span> (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span> (this citation was added manually in an external file book.bib).
-Note that the <code>.bib</code> files need to be listed in the index.Rmd with the YAML <code>bibliography</code> key.</p>
-<p>The RStudio Visual Markdown Editor can also make it easier to insert citations: <a href="https://rstudio.github.io/visual-markdown-editing/#/citations" class="uri">https://rstudio.github.io/visual-markdown-editing/#/citations</a></p>
+<p>Brewer’s Sparrows and Vesper Sparrows are most common, with tracks with anectodal observations.</p>
+</div>
+<div id="plotting-counts-of-focal-species-by-plot-type" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Plotting counts of focal species by plot type<a href="plotting-counts-of-focal-species.html#plotting-counts-of-focal-species-by-plot-type" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Next let’s look at how counts differ by plot type:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="focal_sp_counts_plot-type.png" alt="Counts of five focal species in 2022 by plot type" width="100%" />
+<p class="caption">
+Figure 3.2: Counts of five focal species in 2022 by plot type
+</p>
+</div>
+<p>Given that Vesper Sparrows prefer open ground, it makes sense that they dominate burned plots, while Brewer’s Sparrows, which prefer sage cover, dominate control plots.</p>
 
 </div>
-</div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-xie2015" class="csl-entry">
-Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.org/knitr/">http://yihui.org/knitr/</a>.
-</div>
-<div id="ref-R-bookdown" class="csl-entry">
-———. 2023. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a footnote.<a href="footnotes-and-citations.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="parts.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="blocks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cleaning-the-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -279,7 +276,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-citations.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-cross-refs.Rmd",
 "text": "Edit"
 },
 "history": {

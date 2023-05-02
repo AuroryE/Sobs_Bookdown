@@ -1,11 +1,377 @@
-# Hello bookdown 
+# Cleaning the data
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (`#`) per .Rmd file.
+Although there is plenty to clean in this data, the most critical pieces currently are ensuring that the
+species codes are correct (four characters, all capitalized, no extra spaces, codes are correct for species) and to make sure that any instances where distance and species code data were switched are switched to the correct columns.
 
-## A section
+## Make a vector of "cleaned" data
 
-All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+First, we need a vector of all of the correct species codes, so we need to know what distinct species were seen, both correct and incorrect:
 
-### An unnumbered section {-}
+```{r eval=FALSE}
+sobs_obs %>% 
+  distinct(species_code)
+```
 
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
+Then, we build the vector of the correct species codes:
+
+```{r eval=FALSE}
+corrected_sobs_obs <- data.frame(species_code = c("VESP",
+                                   "WEME",
+                                   "HOLA",
+                                   "ROWR",
+                                   "NOBI",
+                                   "CORA",
+                                   "LASP",
+                                   "CONI",
+                                   "MODO",
+                                   "UNSP",
+                                   "CHSP",
+                                   "BBMA",
+                                   "BUOW",
+                                   "PIJA",
+                                   "SWHA",
+                                   "BTSP",
+                                   "BRSP",
+                                   "GTTO",
+                                   "SATH",
+                                   "SPTO",
+                                   "COGR",
+                                   "SABS",
+                                   "EUCD",
+                                   "GRAP",
+                                   "RTHA",
+                                   "LAZB",
+                                   "LOSH",
+                                   "AMRO",
+                                   "UNBI",
+                                   "GRFL",
+                                   "CHUK",
+                                   "HETH",
+                                   "PISI",
+                                   "NOFL",
+                                   "ATFL",
+                                   "MOBL",
+                                   "RTHU",
+                                   "NOHA",
+                                   "SACR",
+                                   "UNFL",
+                                   "WITU",
+                                   "AMCR",
+                                   "WCSP",
+                                   "BHCO",
+                                   "UNHA",
+                                   "SAPH",
+                                   "LBCU",
+                                   "SAVS",
+                                   "NRWS",
+                                   "COPO",
+                                   "SCOR",
+                                   "HOFI",
+                                   "GRSG",
+                                   "EUST",
+                                   "OCWA",
+                                   "HOWR",
+                                   "TUVU",
+                                   "BRBL",
+                                   "PEFA",
+                                   "NOMO",
+                                   "BLPH",
+                                   "INBU",
+                                   "AMKE",
+                                   "KILL",
+                                   "WEKI",
+                                   "UNOW",
+                                   "YEWA",
+                                   "BGGN",
+                                   "WAVI",
+                                   "BUSH",
+                                   "AMGO",
+                                   "YBCH",
+                                   "BCCH",
+                                   "BARS",
+                                   "TRES",
+                                   "BHGR",
+                                   "DOWO",
+                                   "BUOR",
+                                   "BEWR",
+                                   "MOCH",
+                                   "GRSP",
+                                   "COHA",
+                                   "RUGR",
+                                   "WTSP",
+                                   "RNPH",
+                                   "AMPI",
+                                   "GRYE",
+                                   "CAFI",
+                                   "PLVI",
+                                   "GWTE",
+                                   "GBHE",
+                                   "BLJA")
+)
+```
+
+## Clean the data 
+
+To account for all of the different possibilities that need to be condensed into the correct species codes, we need a long mutate:
+
+```{r eval=FALSE}
+cleaned_data <- sobs_obs %>% 
+  mutate(clean_species_code = case_when(
+    species_code %in% c("Vesp", 
+                        "VeSP",
+                        "Vesp ",
+                        "VESP ",
+                        "vesp",
+                        "VESp",
+                        "VESO",
+                        "VESP",
+                        "117",
+                        "324",
+                        "19"
+                        ) ~ "VESP",
+    species_code %in% c("Weme ",
+                        "Weme",
+                        "WEmE",
+                        "WEME ",
+                        "WEMe",
+                        "WEMA",
+                        "MEWE",
+                        "Mela",
+                        "MeLa",
+                        "MEME",
+                        "WEME",
+                        "132",
+                        "222",
+                        "60"
+                        ) ~ "WEME",
+    species_code %in% c("Hola",
+                        "HOLA ",
+                        "HOlA",
+                        "13 HOLA's",
+                        "Hola ",
+                        "HOLa",
+                        "Horned Lark",
+                        "HOL",
+                        "HOLA",
+                        "107"
+                        ) ~ "HOLA",
+    species_code %in% c("Rowr ",
+                        "Rowr",
+                        "ROWR?",
+                        "ROWR ",
+                        "ROWR"
+                        ) ~ "ROWR",
+    species_code %in% c("NoBI",
+                        "NoBi",
+                        "NOBI") ~ "NOBI",
+    species_code %in% c("CoRa",
+                        "Cora",
+                        "CoRa ",
+                        "CORA ",
+                        "CORA"
+                        ) ~ "CORA",
+    species_code %in% c("Lasp",
+                        "LASP ",
+                        "LASL",
+                        "LASP"
+                        ) ~ "LASP",
+    species_code %in% c("CoNI",
+                        "CONH",
+                        "Night Hawk",
+                        "Niha ",
+                        "Niha",
+                        "NIHA",
+                        "CONI",
+                        "152"
+                        ) ~ "CONI",
+    species_code %in% c("MoDo",
+                        "Modo",
+                        "MODo",
+                        "MODo ",
+                        "MODO ",
+                        "MOSO",
+                        "MODO"
+                        ) ~ "MODO",
+    species_code %in% c("Unsp ",
+                        "Unsp",
+                        "UNSP ",
+                        "UNSP"
+                        ) ~ "UNSP",
+    species_code %in% c("Chsp ",
+                        "Chsp",
+                        "CHSP"
+                        ) ~ "CHSP",
+    species_code %in% c("Bbma ",
+                        "Bbma",
+                        "BLMA",
+                        "BBMP",
+                        "BTMJ",
+                        "BBMA"
+                        ) ~ "BBMA",
+    species_code %in% c("BAOW",
+                        "BUOW"
+                        ) ~ "BUOW",
+    species_code %in% c("Pija",
+                        "PIJA"
+                        ) ~ "PIJA",
+    species_code %in% c("Swha ",
+                        "SWHA ",
+                        "SWHA"
+                        ) ~ "SWHA",
+    species_code %in% c("BLSP",
+                        "BTSP"
+                        ) ~ "BTSP",
+    species_code %in% c("Brsp ",
+                        "Brsp",
+                        "BRSP ",
+                        "Brs",
+                        "Brap",
+                        "BRAP",
+                        " BRSP"
+                        ) ~ "BRSP",
+    species_code %in% c("Gtto ",
+                        "Gtto",
+                        "gtto",
+                        "GTTO ",
+                        "GRTO",
+                        " GTTO",
+                        "20"
+                        ) ~ "GTTO",
+    species_code %in% c("SATH ",
+                        "Sath",
+                        "SATH",
+                        "151"
+                        ) ~ "SATH",
+    species_code %in% c("Spto ",
+                        "Spto",
+                        "Spotted towhee",
+                        "SPTO"
+                        ) ~ "SPTO",
+    species_code %in% c("Sabs ",
+                        "Sabs",
+                        "SABS ",
+                        "Sags",
+                        "SASP",
+                        "SASP ",
+                        "SBSP",
+                        "SABS"
+                        ) ~ "SABS",
+    species_code %in% c("GRPA",
+                        "GRAP"
+                        ) ~ "GRAP",
+    species_code %in% c("Rtha ",
+                        "Rtha",
+                        "RTHA"
+                        ) ~ "RTHA",
+    species_code %in% c("Lazb ",
+                        "LABU",
+                        "Labu ",
+                        "Lazuli bunting",
+                        "LAZB"
+                        ) ~ "LAZB",
+    species_code %in% c("LHSH",
+                        "LOSH"
+                        ) ~ "LOSH",
+    species_code %in% c("UN",
+                        "UNKNOWN",
+                        "UNBI"
+                        ) ~ "UNBI",
+    species_code == " WCSP" ~ "WCSP",
+    species_code %in% c("AMRA",
+                        "AMRO"
+                        ) ~ "AMRO",
+    species_code %in% c("Gray FlyCatcher",
+                        "Gray FlyCatcher ",
+                        "GRFL"
+                        ) ~ "GRFL",
+    species_code %in% c("chukar",
+                        "chukar ",
+                        "chukar?",
+                        "Chukar",
+                        "Chuk",
+                        "Chuk ",
+                        "Chukar?",
+                        "CHUCK"
+                        ) ~ "CHUK",
+    species_code %in% c("Nofl ",
+                        "Nofl",
+                        "Northern flicker"
+                        ) ~ "NOFL",
+    species_code == "ATFC" ~ "ATFL",
+    species_code == "Northern harrier" ~ "NOHA",
+    species_code %in% c("Sacr ",
+                        "Sacr",
+                        "SAND"
+                        ) ~ "SACR",
+    species_code %in% c("Flycatcher",
+                        "Flycatcher "
+                        ) ~ "UNFL",
+    species_code == "Turkey" ~ "WITU",
+    species_code %in% c("Bhco ",
+                        "BRCO",
+                        "BHCB"
+                        ) ~ "BHCO",
+    species_code %in% c("Lbcu ",
+                        "Lbcu",
+                        "LOCU"
+                        ) ~ "LBCU",
+    species_code %in% c("SAGR",
+                        "Greater sage grouse "
+                        ) ~ "GRSG",
+    species_code == "Howr " ~ "HOWR",
+    species_code %in% c("Tuvu ",
+                        "Tuvu"
+                        ) ~ "TUVU",
+    species_code %in% c("Brbl ",
+                        "Brbl",
+                        "BRBB",
+                        "10 BRBB's"
+                        ) ~ "BRBL",
+    species_code == "Spotted falcon " ~ "PEFA",
+    species_code %in% c("Amke ",
+                        "Amke",
+                        "MAKE"
+                        ) ~ "AMKE",
+    species_code == "KIDE" ~ "KILL",
+    species_code == "Unknown owl" ~ "UNOW",
+    species_code == "BLGN" ~ "BGGN",
+    species_code == "bushtit" ~ "BUSH",
+    species_code == "BASW" ~ "BARS",
+    species_code == "TRSW" ~ "TRES",
+    species_code == "GHSP" ~ "GRSP",
+    species_code == "Coha" ~ "COHA",
+    TRUE ~ as.character(species_code)
+  ))
+```
+
+With this new column, we now have almost all of the correct species information. The only thing left is to correctly place the instances were distance and species code data got mixed up:
+
+```{r eval=FALSE}
+cleaned_data[251, 3] = "WEME"
+cleaned_data[251, 4] = 132
+cleaned_data[292, 3] = "VESP"
+cleaned_data[302, 3] = "WEME"
+cleaned_data[302, 4] = 222
+cleaned_data[2002, 3] = "VESP"
+cleaned_data[2002, 4] = 53
+cleaned_data[2197, 3] = "VESP"
+cleaned_data[2917, 4] = 39
+cleaned_data[2197, 4] = 324
+cleaned_data[2426, 3] = "VESP"
+cleaned_data[2426, 4] = 19
+cleaned_data[3116, 3] = "GTTO"
+cleaned_data[3116, 4] = 20
+cleaned_data[4386, 3] = "SPTO"
+cleaned_data[4386, 4] = 53
+cleaned_data[11100, 3] = "HOLA"
+cleaned_data[11100, 4] = 107
+cleaned_data[11104, 3] = "WEME"
+cleaned_data[11104, 4] = 60
+cleaned_data[11207, 3] = "CONI"
+cleaned_data[11207, 4] = 152
+cleaned_data[11584, 3] = "SATH"
+cleaned_data[11584, 4] = 151
+```
+
+
+Now the species code data is completely cleaned, and the distance and species code data is located in the correct columns throughout the data frame.

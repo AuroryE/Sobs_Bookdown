@@ -8,7 +8,7 @@ bibliography: [book.bib, packages.bib]
 # url: your book url like https://bookdown.org/yihui/bookdown
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  This book documents the process for creating a database from the sagebrush-obligate songbird data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures and analyses.
+  This book documents the process for creating a database from the sagebrush-obligate songbird data we collected in Box Elder and Cassia counties during the 2022 field season. It will also describe the data cleaning process and contain some initial figures of focal species counts and counts by plot type.
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
