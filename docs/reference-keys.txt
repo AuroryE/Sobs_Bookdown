@@ -1,8 +1,6 @@
 fig:image
 fig:unnamed-chunk-11
 fig:unnamed-chunk-12
-eq:binom
-thm:tri
 introduction
 building-the-database
 visualizing-database-structure
@@ -12,15 +10,3 @@ clean-the-data
 plotting-counts-of-focal-species
 plotting-counts-of-focal-species-1
 plotting-counts-of-focal-species-by-plot-type
-parts
-footnotes-and-citations
-footnotes
-citations
-blocks
-equations
-theorems-and-proofs
-callout-blocks
-sharing-your-book
-publishing
-pages
-metadata-for-sharing
